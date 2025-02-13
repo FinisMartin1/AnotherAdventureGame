@@ -10,6 +10,9 @@ public class ObjectCreator : MonoBehaviour
     public GameObject stonePrefab;
     public GameObject copperPrefab;
     public GameObject bedPrefab;
+    public GameObject ironPrefab;
+    public GameObject showerPrefab;
+    public GameObject toiletPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,15 @@ public class ObjectCreator : MonoBehaviour
                 break;
             case 5: //bed
                 gameObject = Instantiate(bedPrefab);
+                break;
+            case 6: //shower
+                gameObject = Instantiate(showerPrefab);
+                break;
+            case 7: //toliet
+                gameObject = Instantiate(toiletPrefab);
+                break;
+            case 9://iron
+                gameObject = Instantiate(ironPrefab);
                 break;
         }
         gameObject.transform.position = position;

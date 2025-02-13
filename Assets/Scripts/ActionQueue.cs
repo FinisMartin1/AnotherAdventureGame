@@ -205,15 +205,16 @@ public class ActionQueue : MonoBehaviour
         {
             foreach(int rec in action.ObjectTo.GetComponent<BuildObject>().recipe)
             {
-                if(!action.ObjectTo.GetComponent<BuildObject>().contains.Contains(rec))
-                {
+
+
+
                     GameObject meterial = this.gameObject.GetComponent<Inventory>().invetory.Find(g => g.GetComponent<Properties>().objectId == rec);
                     if(meterial != null)
                     {
                         action.ObjectTo.GetComponent<BuildObject>().contains.Add(rec);
                         this.gameObject.GetComponent<Inventory>().invetory.Remove(meterial);
                     }
-                }
+                
             }
        
         }
@@ -221,7 +222,7 @@ public class ActionQueue : MonoBehaviour
 
     private void PreformBuildBuildTemplateAction(Action action)
     {
-        objectCreator.GetComponent<ObjectCreator>().createObject(5, action.ObjectTo.transform.position);
+        objectCreator.GetComponent<ObjectCreator>().createObject(action.ObjectTo.GetComponent<BuildObject>().objectId, action.ObjectTo.transform.position);
         Destroy(action.ObjectTo);
     }
     private void PreformDrinkFromSourceAction(Action action)

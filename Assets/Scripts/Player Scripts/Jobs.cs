@@ -120,7 +120,7 @@ public class Jobs : MonoBehaviour
     {
         foreach(int meterial in buildTemplate.GetComponent<BuildObject>().recipe)
         {
-            if(!buildTemplate.GetComponent<BuildObject>().contains.Contains(meterial))
+            if(buildTemplate.GetComponent<BuildObject>().contains.Count != buildTemplate.GetComponent<BuildObject>().recipe.Count)
             {
                 GameObject closetMeterial = FindClosestsObjectId(meterial);
                 if (closetMeterial)
@@ -158,24 +158,14 @@ public class Jobs : MonoBehaviour
                     moveToMeterial.AndDo = pickUpMeterial;
                     pickUpMeterial.AndDo = movetoBuildTemplate;
                     movetoBuildTemplate.AndDo = addObjectToBuildTemplate;
-                    bool foundObject = false;
-                    this.GetComponent<ActionQueue>().actions.ForEach(a =>
-                    {
-                        if (a.ObjectTo.GetComponent<Properties>().objectId == meterial)
-                        {
-                            foundObject = true;
-                        }
-                    });
-                    if (!foundObject)
-                    {
-
+   
                         if (moveToMeterial != null)
                         {
 
                             this.GetComponent<ActionQueue>().actions.Add(moveToMeterial);
                         }
 
-                    }
+                    
                 }
             }
         }
@@ -470,7 +460,7 @@ public class Jobs : MonoBehaviour
     private GameObject FindClosestsObjectId(int objectId)
     {
         List<GameObject> meterialGameObjects = Utils.GetAllGameObjects().FindAll(g => g.GetComponent<Properties>() != null);
-        meterialGameObjects = meterialGameObjects.FindAll(g => g.GetComponent<Properties>().objectId == objectId && g.GetComponent<Properties>().claimedBy == null);
+        meterialGameObjects = meterialGameObjects.FindAll(g => g.GetComponent<Properties>().objectId == objectId && (g.GetComponent<Properties>().claimedBy == null || g.GetComponent<Properties>().claimedBy == this.gameObject));
         GameObject closetMetrial = null;
         Vector3 playerPosition = this.gameObject.transform.position;
         List<Action> actions = this.GetComponent<ActionQueue>().actions;

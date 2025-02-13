@@ -12,7 +12,10 @@ public class Utils
         GameObject[] tempActiveObject = UnityEngine.Object.FindObjectsOfType<GameObject>();
         foreach (GameObject gameObject in tempActiveObject)
         {
-            allActiveObject.Add(gameObject);
+            if (gameObject.active == true)
+            {
+                allActiveObject.Add(gameObject);
+            }
         }
         return allActiveObject;
     }

@@ -37,7 +37,7 @@ public class SelectObject : MonoBehaviour
     private Selectors selectors = Selectors.InRectangle;
     public ActionSelector actionSelector = ActionSelector.BuildObjectBed;
     public bool actionButtonPressed = false;
-    public int buildObjectId = 5;
+    public int buildObjectId = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -298,18 +298,14 @@ public class SelectObject : MonoBehaviour
         BuildObject.AddComponent<BuildObject>();
         BuildObject.GetComponent<BuildObject>().buildType = global::BuildObject.BuildType.BuildObject;
         BuildObject.GetComponent<BuildObject>().objectId = buildObjectId;
+        BuildObject.GetComponent<BuildObject>().recipe = new List<int>();
         BuildObject.GetComponent<BuildObject>().meterial = this.meterial;
         BuildObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Player_Box");
         BuildObject.AddComponent<BoxCollider2D>();
         BuildObject.name = "BuildObject_Template";
         BuildObject.transform.localScale = new Vector3((float)1.1, (float)1.1, 1);
 
-        switch(actionSelector)
-        {
-            case ActionSelector.BuildObjectBed:
-                BuildObject.GetComponent<BuildObject>().recipe.Add(1);
-                break;
-        }
+
 
         if (startBuildSquaresX < buildSquaresX && startBuildSquaresY < buildSquaresY)
         {

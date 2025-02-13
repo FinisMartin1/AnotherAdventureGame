@@ -93,7 +93,9 @@
     <Compile Include="Assets\Scripts\Object Scripts\Properties.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\AttackSpace.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\SetBuildObjectSelector.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Jobs.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\DisableSelector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\ObjectCreator.cs" />

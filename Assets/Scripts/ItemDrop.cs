@@ -8,7 +8,14 @@ public class ItemDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetDropsList();
+        if (this.gameObject.GetComponent<Properties>() != null && this.gameObject.GetComponent<Properties>().objectId != null)
+        {
+            SetDropListByObjectId(this.gameObject.GetComponent<Properties>().objectId);
+        }
+        else
+        {
+            SetDropsList();
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +41,22 @@ public class ItemDrop : MonoBehaviour
                 drops.Add(new Drop(75, 3, 3));
                 drops.Add(new Drop(75, 2, 3));
                 break;
+            case "IronNode":
+                drops.Add(new Drop(75, 3, 3));
+                drops.Add(new Drop(75, 2, 4));
+                break;
+        }
+    }
+
+    private void SetDropListByObjectId(int objectId)
+    {
+        switch(objectId)
+        {
+            case 8:
+                drops.Add(new Drop(75, 3, 3));
+                drops.Add(new Drop(75, 2, 9));
+                break;
+
         }
     }
     

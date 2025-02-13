@@ -28,7 +28,10 @@ public class Properties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(objectId == 0)
+        {
+            DefineObjectProperties();
+        }
     }
 
     private void DefineObjectProperties()
@@ -39,24 +42,28 @@ public class Properties : MonoBehaviour
                 weight = 45;
                 objectId = 1;
                 break;
-            case "CopperNuget":
+            case "CopperNuget(Clone)":
                 objectId = 2;
                 break;
-            case "Stone":
+            case "Stone(Clone)":
                 objectId = 3;
                 break;
-            case "IronNuget":
+            case "IronNugget(Clone)":
                 objectId = 4;
                 break;
-            case "Bed":
+            case "Bed(Clone)":
                 objectId = 5;
                 break;
-            case "Shower":
+            case "Shower(Clone)":
                 objectId = 6;
                 break;
-            case "Toliet":
+            case "Toliet(Clone)":
                 objectId = 7;
                 break;
+            case "IronNode":
+                objectId = 8;
+                break;
+
         }
     }
 }

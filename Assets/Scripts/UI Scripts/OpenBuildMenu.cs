@@ -5,6 +5,7 @@ using UnityEngine;
 public class OpenBuildMenu : MonoBehaviour
 {
     public GameObject buildMenu;
+    public GameObject Select;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class OpenBuildMenu : MonoBehaviour
         if (buildMenu.active || buildMenu.active)
         {
             buildMenu.SetActive(false);
+            Select.SetActive(true);
         }
         else
         {

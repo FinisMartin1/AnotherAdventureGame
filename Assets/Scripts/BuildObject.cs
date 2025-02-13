@@ -25,7 +25,7 @@ public class BuildObject : MonoBehaviour
     public BuildType buildType = BuildType.BuildWall;
     public bool isBuilding = false;
     public bool isReadyToBuild = false;
-    public int objectId = 0;
+    public int objectId = -1;
     public GameObject builder;
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,7 @@ public class BuildObject : MonoBehaviour
         {
 
         }
-        if(recipe.Count == 0)
+        if(recipe.Count == 0 && objectId != -1)
         {
             SetRecipe(objectId);
         }
