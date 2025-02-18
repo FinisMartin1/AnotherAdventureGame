@@ -83,6 +83,28 @@ public class Utils
         return false;
     }
 
+    public static bool CheckActionListForActionType(List<Action> actions , Action.ActionType actionType)
+    {
+        Action tempAction;
+        foreach(Action action in actions)
+        {
+            tempAction = action;
+            while(tempAction.AndDo != null)
+            {
+                if(tempAction.actionType == actionType)
+                {
+                    return true;
+                }
+                tempAction = tempAction.AndDo;
+            }
+            if (tempAction.actionType == actionType)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
 

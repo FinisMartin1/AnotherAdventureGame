@@ -73,6 +73,10 @@ public class ActionQueue : MonoBehaviour
                     actions[0].IsCompleted = true;
                     actions[0].IsPreforming = false;
                 }
+                if (actions[0].completeType == Action.CompleteType.WaitTillNeedIsFulfield)
+                {
+                    CheckIfNeedIsFulfilled(actions[0].needType);
+                }
             }
         }
     }
@@ -115,6 +119,8 @@ public class ActionQueue : MonoBehaviour
                     break;
                 case Action.ActionType.BuildObjectTemplate:
                     this.PreformBuildBuildTemplateAction(action);
+                    break;
+                case Action.ActionType.Wait:
                     break;
                 default:
                     Debug.LogError("Action type was not found");
@@ -228,5 +234,21 @@ public class ActionQueue : MonoBehaviour
     private void PreformDrinkFromSourceAction(Action action)
     {
         this.GetComponent<Needs>().hunger = this.GetComponent<Needs>().thrist = 100;
+    }
+
+    private void CheckIfNeedIsFulfilled(Needs.NeedType needType)
+    {
+        switch(needType)
+        {
+            case Needs.NeedType.BLADDER:
+                if (this.gameObject.GetComponent<Needs>().bladder >= 100)
+                {
+                    this.gameObject.GetComponent<Needs>().bladder = 100;
+                    actions[0].IsCompleted = true;
+                    actions[0].IsPreforming = false;
+                    actions[0].ObjectTo.GetComponent<ActionObject>().pawnUsing = null;
+                }
+                break;
+        }
     }
 }

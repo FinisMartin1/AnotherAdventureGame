@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3386097572310693289}
   - component: {fileID: 3300416694487387623}
   - component: {fileID: -1164949830939877020}
+  - component: {fileID: 249223829848054986}
   m_Layer: 0
   m_Name: Toliet
   m_TagString: Untagged
@@ -102,3 +103,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &249223829848054986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5297256362213984244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d663bf20bdcfc2e43add155cfaa3bc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionObjectType: 1
+  multiplier: 1
+  pawnUsing: {fileID: 0}

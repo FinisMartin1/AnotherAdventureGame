@@ -20,19 +20,21 @@ public class Action
         DrinkFromContainerInInv,
         DrinkFromSource,
         AddToBuildTemplate,
-        BuildObjectTemplate
+        BuildObjectTemplate,
+        Wait
     }
 
     public enum CompleteType
     {
         Instant,
         ObjectDestoryed,
-        StoppedMovment
+        StoppedMovment,
+        WaitTillNeedIsFulfield
     }
 
     public ActionType actionType = ActionType.NoAction;
     public CompleteType completeType = CompleteType.Instant;
-
+    public Needs.NeedType needType;
     public bool IsCompleted = false;
     public bool IsPreforming = false;
     public Action? AndDo = null;

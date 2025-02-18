@@ -159,7 +159,7 @@ public class Jobs : MonoBehaviour
                     pickUpMeterial.AndDo = movetoBuildTemplate;
                     movetoBuildTemplate.AndDo = addObjectToBuildTemplate;
    
-                        if (moveToMeterial != null)
+                        if (moveToMeterial != null && !Utils.CheckActionListForActionType(this.GetComponent<ActionQueue>().actions, Action.ActionType.AddToBuildTemplate))
                         {
 
                             this.GetComponent<ActionQueue>().actions.Add(moveToMeterial);

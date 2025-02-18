@@ -1,11 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Needs : MonoBehaviour
 {
-
+    public enum NeedType
+    {
+        HUNGER,
+        THIRST,
+        BLADDER,
+        SOCIAL,
+        SLEEP,
+        FUN,
+        HYGIENE
+    }
     public float hunger = 35;
     public float thrist = 100;
     public float bladder = 100;
@@ -61,6 +71,57 @@ public class Needs : MonoBehaviour
         if(thrist < 30 && !fulfillingThirst)
         {
             //SeekNearestWaterSouce();
+        }
+
+        if(bladder <=0)
+        {
+            bladder = 100;
+        }
+        if(bladder < 30)
+        {
+            SeekNearestToilet();
+        }
+    }
+
+    private void SeekNearestToilet()
+    {
+        List<GameObject> allActiveObject = Utils.GetAllGameObjects();
+        List<GameObject> toilets = allActiveObject.FindAll(o => o.GetComponent<Properties>() != null && o.GetComponent<Properties>().objectId == 7 && o.GetComponent<ActionObject>() != null && o.GetComponent<ActionObject>().pawnUsing == null);
+        float dis = int.MaxValue;
+        GameObject closetToilet = null;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        foreach (GameObject toilet in toilets)
+        {
+            float tempDis = Vector3.Distance(playerPosition, toilet.transform.position);
+            if (dis > tempDis)
+            {
+                dis = tempDis;
+
+                closetToilet = toilet;
+
+            }
+        }
+        if(closetToilet != null)
+        {
+            Action moveToToilet = new Action
+            {
+                actionType = Action.ActionType.Movement,
+                completeType = Action.CompleteType.StoppedMovment,
+                ObjectTo = closetToilet
+            };
+            bool actionInUse = false;
+            this.gameObject.GetComponent<ActionQueue>().actions.ForEach(a =>
+            {
+                if (a.actionType == Action.ActionType.Movement && a.ObjectTo.GetComponent<Properties>().objectId == 7)
+                {
+                    actionInUse = true;
+                }
+            });
+            if(!actionInUse)
+            {
+                this.GetComponent<ActionQueue>().actions.Add(moveToToilet);
+                closetToilet.GetComponent<ActionObject>().pawnUsing = this.gameObject;
+            }
         }
     }
 
