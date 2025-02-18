@@ -249,6 +249,24 @@ public class ActionQueue : MonoBehaviour
                     actions[0].ObjectTo.GetComponent<ActionObject>().pawnUsing = null;
                 }
                 break;
+            case Needs.NeedType.HYGIENE:
+                if (this.gameObject.GetComponent<Needs>().hygiene >= 100)
+                {
+                    this.gameObject.GetComponent<Needs>().hygiene = 100;
+                    actions[0].IsCompleted = true;
+                    actions[0].IsPreforming = false;
+                    actions[0].ObjectTo.GetComponent<ActionObject>().pawnUsing = null;
+                }
+                break;
+            case Needs.NeedType.SLEEP:
+                if (this.gameObject.GetComponent<Needs>().sleep >= 100)
+                {
+                    this.gameObject.GetComponent<Needs>().sleep = 100;
+                    actions[0].IsCompleted = true;
+                    actions[0].IsPreforming = false;
+                    actions[0].ObjectTo.GetComponent<ActionObject>().pawnUsing = null;
+                }
+                break;
         }
     }
 }

@@ -81,6 +81,100 @@ public class Needs : MonoBehaviour
         {
             SeekNearestToilet();
         }
+
+        if(hygiene < 30)
+        {
+            SeekNearestbathspot();
+        }
+
+        if(sleep < 30)
+        {
+            SeekNearestSleepSpot();
+        }
+    }
+
+    private void SeekNearestSleepSpot()
+    {
+        List<GameObject> allActiveObject = Utils.GetAllGameObjects();
+        List<GameObject> sleepSpots = allActiveObject.FindAll(o => o.GetComponent<Properties>() != null && o.GetComponent<Properties>().objectId == 5 && o.GetComponent<ActionObject>() != null && o.GetComponent<ActionObject>().pawnUsing == null);
+        float dis = int.MaxValue;
+        GameObject closetBathspot = null;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        foreach (GameObject sleepSpot in sleepSpots)
+        {
+            float tempDis = Vector3.Distance(playerPosition, sleepSpot.transform.position);
+            if (dis > tempDis)
+            {
+                dis = tempDis;
+
+                closetBathspot = sleepSpot;
+
+            }
+        }
+        if (closetBathspot != null)
+        {
+            Action moveToSleepSpot = new Action
+            {
+                actionType = Action.ActionType.Movement,
+                completeType = Action.CompleteType.StoppedMovment,
+                ObjectTo = closetBathspot
+            };
+            bool actionInUse = false;
+            this.gameObject.GetComponent<ActionQueue>().actions.ForEach(a =>
+            {
+                if (a.actionType == Action.ActionType.Movement && a.ObjectTo.GetComponent<Properties>().objectId == 7)
+                {
+                    actionInUse = true;
+                }
+            });
+            if (!actionInUse)
+            {
+                this.GetComponent<ActionQueue>().actions.Add(moveToSleepSpot);
+                closetBathspot.GetComponent<ActionObject>().pawnUsing = this.gameObject;
+            }
+        }
+    }
+
+    private void SeekNearestbathspot()
+    {
+        List<GameObject> allActiveObject = Utils.GetAllGameObjects();
+        List<GameObject> bathspots  = allActiveObject.FindAll(o => o.GetComponent<Properties>() != null && o.GetComponent<Properties>().objectId == 6 && o.GetComponent<ActionObject>() != null && o.GetComponent<ActionObject>().pawnUsing == null);
+        float dis = int.MaxValue;
+        GameObject closetBathspot = null;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        foreach (GameObject bathspot in bathspots)
+        {
+            float tempDis = Vector3.Distance(playerPosition, bathspot.transform.position);
+            if (dis > tempDis)
+            {
+                dis = tempDis;
+
+                closetBathspot = bathspot;
+
+            }
+        }
+        if (closetBathspot != null)
+        {
+            Action moveToBathSpot = new Action
+            {
+                actionType = Action.ActionType.Movement,
+                completeType = Action.CompleteType.StoppedMovment,
+                ObjectTo = closetBathspot
+            };
+            bool actionInUse = false;
+            this.gameObject.GetComponent<ActionQueue>().actions.ForEach(a =>
+            {
+                if (a.actionType == Action.ActionType.Movement && a.ObjectTo.GetComponent<Properties>().objectId == 7)
+                {
+                    actionInUse = true;
+                }
+            });
+            if (!actionInUse)
+            {
+                this.GetComponent<ActionQueue>().actions.Add(moveToBathSpot);
+                closetBathspot.GetComponent<ActionObject>().pawnUsing = this.gameObject;
+            }
+        }
     }
 
     private void SeekNearestToilet()

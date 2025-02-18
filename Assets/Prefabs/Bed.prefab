@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 514506343530442805}
   - component: {fileID: -8396841501771611357}
   - component: {fileID: 3672793744591647371}
+  - component: {fileID: 2141531647084222684}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -102,3 +103,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2141531647084222684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6419000894357571904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d663bf20bdcfc2e43add155cfaa3bc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionObjectType: 3
+  multiplier: 1
+  pawnUsing: {fileID: 0}

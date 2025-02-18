@@ -8,7 +8,9 @@ public class ActionObject : MonoBehaviour
     public enum ActionObjectType
     {
         NONE,
-        RELIEFBLADDER
+        RELIEFBLADDER,
+        RELIEFHYGIENE,
+        RELIEFSLEEP
     }
 
     public ActionObjectType actionObjectType = ActionObjectType.NONE;
@@ -67,6 +69,50 @@ public class ActionObject : MonoBehaviour
                 }
                 PeformReliefBladder();
                 break;
+            case ActionObjectType.RELIEFHYGIENE:
+                Action waitForHygieneToBeFufilled = new Action
+                {
+                    actionType = Action.ActionType.Wait,
+                    completeType = Action.CompleteType.WaitTillNeedIsFulfield,
+                    needType = Needs.NeedType.HYGIENE,
+                    ObjectTo = this.gameObject
+                };
+                actionInUse = false;
+                pawnUsing.GetComponent<ActionQueue>().actions.ForEach(a =>
+                {
+                    if (a.completeType == Action.CompleteType.WaitTillNeedIsFulfield && a.needType == Needs.NeedType.HYGIENE)
+                    {
+                        actionInUse = true;
+                    }
+                });
+                if (!actionInUse)
+                {
+                    pawnUsing.GetComponent<ActionQueue>().actions.Add(waitForHygieneToBeFufilled);
+                }
+                PeformReliefHygiene();
+                break;
+            case ActionObjectType.RELIEFSLEEP:
+                Action waitForSleepToBeFufilled = new Action
+                {
+                    actionType = Action.ActionType.Wait,
+                    completeType = Action.CompleteType.WaitTillNeedIsFulfield,
+                    needType = Needs.NeedType.SLEEP,
+                    ObjectTo = this.gameObject
+                };
+                actionInUse = false;
+                pawnUsing.GetComponent<ActionQueue>().actions.ForEach(a =>
+                {
+                    if (a.completeType == Action.CompleteType.WaitTillNeedIsFulfield && a.needType == Needs.NeedType.SLEEP)
+                    {
+                        actionInUse = true;
+                    }
+                });
+                if (!actionInUse)
+                {
+                    pawnUsing.GetComponent<ActionQueue>().actions.Add(waitForSleepToBeFufilled);
+                }
+                PeformReliefSleep();
+                break;
         }
     }
 
@@ -81,6 +127,36 @@ public class ActionObject : MonoBehaviour
         if (pawnUsing.GetComponent<ActionQueue>().actions[0] != null && pawnUsing.GetComponent<ActionQueue>().actions[0].completeType == Action.CompleteType.WaitTillNeedIsFulfield && pawnUsing.GetComponent<ActionQueue>().actions[0].needType == Needs.NeedType.BLADDER)
         {
             pawnUsing.GetComponent<Needs>().bladder = pawnUsing.GetComponent<Needs>().bladder + multiplier;
+        }
+
+    }
+
+    private void PeformReliefHygiene()
+    {
+        if (pawnUsing.GetComponent<Needs>() == null || pawnUsing.GetComponent<ActionQueue>() == null)
+        {
+            pawnUsing = null;
+            return;
+        }
+
+        if (pawnUsing.GetComponent<ActionQueue>().actions[0] != null && pawnUsing.GetComponent<ActionQueue>().actions[0].completeType == Action.CompleteType.WaitTillNeedIsFulfield && pawnUsing.GetComponent<ActionQueue>().actions[0].needType == Needs.NeedType.HYGIENE)
+        {
+            pawnUsing.GetComponent<Needs>().hygiene = pawnUsing.GetComponent<Needs>().hygiene + multiplier;
+        }
+
+    }
+
+    private void PeformReliefSleep()
+    {
+        if (pawnUsing.GetComponent<Needs>() == null || pawnUsing.GetComponent<ActionQueue>() == null)
+        {
+            pawnUsing = null;
+            return;
+        }
+
+        if (pawnUsing.GetComponent<ActionQueue>().actions[0] != null && pawnUsing.GetComponent<ActionQueue>().actions[0].completeType == Action.CompleteType.WaitTillNeedIsFulfield && pawnUsing.GetComponent<ActionQueue>().actions[0].needType == Needs.NeedType.SLEEP)
+        {
+            pawnUsing.GetComponent<Needs>().sleep = pawnUsing.GetComponent<Needs>().sleep + multiplier;
         }
 
     }
