@@ -9,7 +9,7 @@ public class Testing : MonoBehaviour
     
     private void Start()
     {
-        pathfinding = new Pathfinding(10, 10);
+        pathfinding = new Pathfinding(200, 200);
     }
 
     private void Update()

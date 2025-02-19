@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
     }
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -48,5 +48,5 @@ public class Player : MonoBehaviour
             }
             transform.Translate( moveDelta.x * Time.deltaTime,0, 0);
         }
-    }
+    }*/
 }

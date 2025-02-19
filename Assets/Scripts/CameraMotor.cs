@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CameraMotor : MonoBehaviour
@@ -39,5 +40,14 @@ public class CameraMotor : MonoBehaviour
         }
 
         transform.position += new Vector3(delta.x, deltaY, 0);
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            this.GetComponent<Camera>().orthographicSize--;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            this.GetComponent<Camera>().orthographicSize++;
+        }
     }
 }
