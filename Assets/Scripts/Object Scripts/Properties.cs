@@ -63,6 +63,12 @@ public class Properties : MonoBehaviour
             case "IronNode":
                 objectId = 8;
                 break;
+            case "Tree(Clone)":
+                objectId = 10;
+                break;
+            case "WaterTile(Clone)":
+                objectId = 11;
+                break;
 
         }
     }

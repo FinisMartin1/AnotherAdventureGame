@@ -21,7 +21,17 @@ public class ItemDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (drops.Count <= 0)
+        {
+            if (this.gameObject.GetComponent<Properties>() != null && this.gameObject.GetComponent<Properties>().objectId != null)
+            {
+                SetDropListByObjectId(this.gameObject.GetComponent<Properties>().objectId);
+            }
+            else
+            {
+                SetDropsList();
+            }
+        }
     }
 
     public void OnDestroy()
@@ -56,7 +66,9 @@ public class ItemDrop : MonoBehaviour
                 drops.Add(new Drop(75, 3, 3));
                 drops.Add(new Drop(75, 2, 9));
                 break;
-
+            case 10:
+                drops.Add(new Drop(100, 5, 1));
+                break;
         }
     }
     

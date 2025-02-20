@@ -36,12 +36,12 @@ public class Grid<TGridObject>
             for(int y=0; y<gridArray.GetLength(1);y++)
             {
 
-                Debug.DrawLine(GetWorldPostion(x, y), GetWorldPostion(x, y+1), Color.white, Mathf.Infinity);
-                Debug.DrawLine(GetWorldPostion(x, y), GetWorldPostion(x+1, y), Color.white, Mathf.Infinity);
+               // Debug.DrawLine(GetWorldPostion(x, y), GetWorldPostion(x, y+1), Color.white, Mathf.Infinity);
+               // Debug.DrawLine(GetWorldPostion(x, y), GetWorldPostion(x+1, y), Color.white, Mathf.Infinity);
             }
         }
-        Debug.DrawLine(GetWorldPostion(0, height), GetWorldPostion(width, height), Color.white, Mathf.Infinity);
-        Debug.DrawLine(GetWorldPostion(width, 0), GetWorldPostion(width, height), Color.white, Mathf.Infinity);
+       // Debug.DrawLine(GetWorldPostion(0, height), GetWorldPostion(width, height), Color.white, Mathf.Infinity);
+      //  Debug.DrawLine(GetWorldPostion(width, 0), GetWorldPostion(width, height), Color.white, Mathf.Infinity);
 
 
     }
