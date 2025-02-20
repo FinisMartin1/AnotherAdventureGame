@@ -12,6 +12,9 @@ public class SelectObject : MonoBehaviour
     public RectTransform selectionBox;
     public Rect actualSelectionBox;
 
+    public GameObject CharacterPortrait;
+    public GameObject AssignMenu;
+
 
     public Vector2 startPostion;
     public Vector2 endPostion;
@@ -21,6 +24,7 @@ public class SelectObject : MonoBehaviour
 
 
     public List<GameObject> selectedObjects = new List<GameObject>();
+    public GameObject selectedPlayer = null;
     public enum Selectors
     {
         noSelector,
@@ -55,6 +59,10 @@ public class SelectObject : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             actionSelector = ActionSelector.noAction;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && !AssignMenu.active)
+        {
+            this.selectedObjects.Clear();
         }
         PeformKeyActions();
         if (Input.GetMouseButtonDown(0))
@@ -131,6 +139,18 @@ public class SelectObject : MonoBehaviour
 
             SetSelector();
             CheckUISelection();
+
+        }
+        if (selectedObjects.Count == 1 && selectedObjects[0].name == "Player")
+        {
+
+            this.selectedPlayer = selectedObjects[0];
+            this.CharacterPortrait.SetActive(true);
+        }
+        else
+        {
+            this.selectedPlayer = null;
+            this.CharacterPortrait.SetActive(false);
         }
     }
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldCreator : MonoBehaviour
 {
@@ -69,5 +71,7 @@ public class WorldCreator : MonoBehaviour
                 objectCreator.GetComponent<ObjectCreator>().createObject(11, tempPos);
             }
         }
+        
     }
+    
 }
