@@ -36,7 +36,8 @@ public class SelectObject : MonoBehaviour
         ChopWood,
         BuildWall,
         Mine,
-        BuildObjectBed
+        BuildObjectBed,
+        HarvestPlants
     }
     private Selectors selectors = Selectors.InRectangle;
     public ActionSelector actionSelector = ActionSelector.BuildObjectBed;
@@ -256,6 +257,9 @@ public class SelectObject : MonoBehaviour
                 case ActionSelector.Mine:
                 SetMineNodeToHarvest();
                 break;
+                case ActionSelector.HarvestPlants:
+                SetPlantsToHarvest();
+                break;
             }
         }
 
@@ -285,8 +289,17 @@ public class SelectObject : MonoBehaviour
             }
 
         }
-    }
 
+        }
+        private void SetPlantsToHarvest()
+    {
+        List<GameObject> selectedPlantObjects = selectedObjects.FindAll(g => g.GetComponent<Farmplot>() != null && g.GetComponent<Farmplot>().readyForHarvest);
+        foreach (GameObject plantObject in selectedPlantObjects)
+        {
+            plantObject.GetComponent<Harvestable>().IsMarkedForHarvest = true;
+            selectedObjects.Remove(plantObject);
+        }
+    }
         private void PeformKeyActions()
         {
             if (Input.GetKeyDown(KeyCode.C))
