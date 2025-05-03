@@ -16,6 +16,8 @@ public class ObjectCreator : MonoBehaviour
     public GameObject treePrefab;
     public GameObject ironNode;
     public GameObject waterTile;
+    public GameObject wheatPrefab;
+    public GameObject wheatSeedPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,12 @@ public class ObjectCreator : MonoBehaviour
                 break;
             case 11:
                 gameObject = Instantiate(waterTile);
+                break;
+            case 12:
+                gameObject = Instantiate(wheatSeedPrefab);
+                break;
+            case 13:
+                gameObject = Instantiate(wheatPrefab);
                 break;
         }
         gameObject.transform.position = position;

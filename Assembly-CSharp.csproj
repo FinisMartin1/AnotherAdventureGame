@@ -74,8 +74,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
-    <Compile Include="Assets\Scripts\ActionQueue.cs" />
-    <Compile Include="Assets\Scripts\Harvestable.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\OpenMeterialMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -91,6 +89,7 @@
     <Compile Include="Assets\Scripts\EnemyAbilityList.cs" />
     <Compile Include="Assets\Scripts\CameraMotor.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\ActionQueue.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\World Scripts\DayNightCycle.cs" />
     <Compile Include="Assets\Scripts\Destoyer.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Assets\Scripts\Object Scripts\ActionObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Scripts\Action.cs" />
     <Compile Include="Assets\Scripts\PlayerPathfinding.cs" />
     <Compile Include="Assets\Scripts\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\AssignJob.cs" />
@@ -130,6 +128,7 @@
     <Compile Include="Assets\Scripts\SImpleEnemyBehaviorTree.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Personality.cs" />
     <Compile Include="Assets\Scripts\NPCPathfinding.cs" />
+    <Compile Include="Assets\Scripts\Object Scripts\Harvestable.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Stats.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
@@ -138,6 +137,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\Action.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\PathNode.cs" />

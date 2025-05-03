@@ -13,6 +13,7 @@ public class Jobs : MonoBehaviour
     public bool IsBuilder = false;
     public bool IsMiner = false;
     public bool IsHualer = false;
+    public bool IsFarmer = false;
     public bool idle = false;
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,11 @@ public class Jobs : MonoBehaviour
         if(IsHualer)
         {
             FindBuildTemp();
+        }
+        if(IsFarmer)
+        {
+            FindMarkedHarvrestableFarmPlot();
+            FindPlantableFarmPlot();
         }
        if(this.GetComponent<ActionQueue>().actions.Count <= 0)
         {
@@ -114,6 +120,58 @@ public class Jobs : MonoBehaviour
             SetUpActionQueueToCarryObjectToBuildTemplate(buildTemplate);
         }
         
+    }
+
+    private void FindPlantableFarmPlot()
+    {
+        List<GameObject> farmplots = Utils.GetAllGameObjects().FindAll(o => o.GetComponent<Farmplot>() != null && o.GetComponent<Properties>().claimedBy == null && !o.GetComponent<Farmplot>().hasSeed);
+        foreach (GameObject farmplot in farmplots)
+        {
+            SetUpActionQueueToPlantSeed(farmplot);
+        }
+    }
+
+    private void SetUpActionQueueToPlantSeed(GameObject farmplot)
+    {
+        GameObject closetSeed = FindClosestsObjectId(farmplot.GetComponent<Farmplot>().GetSeedId(farmplot.GetComponent<Farmplot>().seed));
+        if(closetSeed != null)
+        {
+            closetSeed.GetComponent<Properties>().claimedBy = this.gameObject;
+            farmplot.GetComponent<Properties>().claimedBy = this.gameObject;
+            Action moveToSeed = new Action
+            {
+                actionType = Action.ActionType.Movement,
+                completeType = Action.CompleteType.StoppedMovment,
+                ObjectTo = closetSeed
+            };
+            Action pickUpSeed = new Action
+
+            {
+                actionType = Action.ActionType.GrabObject,
+                completeType = Action.CompleteType.Instant,
+                ObjectTo = closetSeed
+            };
+            Action movetoFarmplot = new Action
+            {
+                actionType = Action.ActionType.MoveNextTo,
+                completeType = Action.CompleteType.StoppedMovment,
+                NextTo = farmplot.transform.position
+            };
+            Action plantSeed = new Action
+            {
+                actionType = Action.ActionType.PlantSeed,
+                completeType = Action.CompleteType.Instant,
+                ObjectTo = farmplot
+            };
+            movetoFarmplot.AndDo = plantSeed;
+            pickUpSeed.AndDo = movetoFarmplot;
+            moveToSeed.AndDo = pickUpSeed;
+            if (moveToSeed != null && !Utils.CheckActionListForActionType(this.GetComponent<ActionQueue>().actions, Action.ActionType.PlantSeed))
+            {
+
+                this.GetComponent<ActionQueue>().actions.Add(moveToSeed);
+            }
+        }
     }
 
     private void SetUpActionQueueToCarryObjectToBuildTemplate(GameObject buildTemplate)
@@ -328,6 +386,35 @@ public class Jobs : MonoBehaviour
         }
     }
 
+    public void FindMarkedHarvrestableFarmPlot()
+    {
+        List<GameObject> harvestableFarmPlots = Utils.GetAllGameObjects().FindAll(g => g.GetComponent<Harvestable>() != null && g.GetComponent<Harvestable>().harvestType == Harvestable.HarvestType.Farmplot);
+        if(harvestableFarmPlots != null && harvestableFarmPlots.Count > 0)
+        {
+            harvestableFarmPlots = harvestableFarmPlots.FindAll(g => g.GetComponent<Harvestable>().IsMarkedForHarvest);
+        }
+        foreach (GameObject harvestableFarmPlot in harvestableFarmPlots)
+        {
+            Action action = new Action
+            {
+                actionType = Action.ActionType.Movement,
+                completeType = Action.CompleteType.StoppedMovment,
+                ObjectTo = harvestableFarmPlot
+            };
+            Action HarvestAction = new Action
+            {
+                actionType = Action.ActionType.HavestObjectPlant,
+                completeType = Action.CompleteType.Instant,
+                timer = 30.0f - (this.GetComponent<Stats>().plantCutting * (int)(this.GetComponent<Stats>().Strength * .25)),
+                ObjectTo = harvestableFarmPlot
+            };
+
+            action.AndDo = HarvestAction;
+            AddActionToActionQueue(action, harvestableFarmPlot);
+        }
+    }
+
+
     public void FindMarkedCuttableTrees()
     {
         List<GameObject> allActiveObject = Utils.GetAllGameObjects();
@@ -418,6 +505,21 @@ public class Jobs : MonoBehaviour
         }
     }
 
+    private void AddActionToActionQueue(Action action, GameObject gameObject)
+    {
+        bool foundObject = false;
+        this.GetComponent<ActionQueue>().actions.ForEach(a =>
+        {
+            if (GameObject.ReferenceEquals(a.ObjectTo, gameObject))
+            {
+                foundObject = true;
+            }
+        });
+        if (!foundObject)
+        {
+            this.GetComponent<ActionQueue>().actions.Add(action);
+        }
+    }
     private bool CheckInvatoryForBuildMetrial(int objectId)
     {
         GameObject metrial = this.gameObject.GetComponent<Inventory>().invetory.FirstOrDefault(a => a.GetComponent<Properties>().objectId == objectId);

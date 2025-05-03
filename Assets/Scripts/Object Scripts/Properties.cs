@@ -36,6 +36,7 @@ public class Properties : MonoBehaviour
 
     private void DefineObjectProperties()
     {
+        //Make sure that the propteties ids match the object creator ids
         switch(this.gameObject.name)
         {
             case "Wood Logs":
@@ -69,6 +70,13 @@ public class Properties : MonoBehaviour
             case "WaterTile(Clone)":
                 objectId = 11;
                 break;
+            case "WheatSeed(Clone)":
+                objectId = 12;
+                break;
+            case "Wheat(Clone)":
+                objectId = 13;
+                break;
+
 
         }
     }
