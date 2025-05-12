@@ -36,6 +36,9 @@ public class AssignJob : MonoBehaviour
                 case "HaulerToggle":
                     this.gameObject.GetComponent<Toggle>().isOn = selectedPawn.GetComponent<Jobs>().IsHualer;
                     break;
+                case "FarmerToggle":
+                    this.gameObject.GetComponent<Toggle>().isOn = selectedPawn.GetComponent<Jobs>().IsFarmer;
+                    break;
             }
         }    
     }
@@ -58,6 +61,9 @@ public class AssignJob : MonoBehaviour
                 case "HaulerToggle":
                     selectedPawn.GetComponent<Jobs>().IsHualer = true;
                     break;
+                case "FarmerToggle":
+                    selectedPawn.GetComponent<Jobs>().IsFarmer = true;
+                    break;
             }
         }
         else
@@ -75,6 +81,9 @@ public class AssignJob : MonoBehaviour
                     break;
                 case "HaulerToggle":
                     selectedPawn.GetComponent<Jobs>().IsHualer = false;
+                    break;
+                case "FarmerToggle":
+                    selectedPawn.GetComponent<Jobs>().IsFarmer = false;
                     break;
             }
         }
