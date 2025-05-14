@@ -15,6 +15,7 @@ public class Properties : MonoBehaviour
     public int nutrition = 0;
     public Guid id;
     public int objectId;
+    public bool canStoreInInventory = false;
 
     public ObjectType objectType;
     public GameObject claimedBy;
@@ -42,27 +43,40 @@ public class Properties : MonoBehaviour
             case "Wood Logs":
                 weight = 45;
                 objectId = 1;
+                canStoreInInventory = true;
+                break;
+            case "Wood Logs(Clone)":
+                weight = 45;
+                objectId = 1;
+                canStoreInInventory = true;
                 break;
             case "CopperNuget(Clone)":
                 objectId = 2;
+                canStoreInInventory = true;
                 break;
             case "Stone(Clone)":
                 objectId = 3;
+                canStoreInInventory = true;
                 break;
             case "IronNugget(Clone)":
                 objectId = 4;
+                canStoreInInventory = true;
                 break;
             case "Bed(Clone)":
                 objectId = 5;
+                canStoreInInventory = true;
                 break;
             case "Shower(Clone)":
                 objectId = 6;
+                canStoreInInventory = true;
                 break;
             case "Toliet(Clone)":
                 objectId = 7;
+                canStoreInInventory = true;
                 break;
             case "IronNode":
                 objectId = 8;
+                canStoreInInventory = true;
                 break;
             case "Tree(Clone)":
                 objectId = 10;
@@ -72,9 +86,11 @@ public class Properties : MonoBehaviour
                 break;
             case "WheatSeed(Clone)":
                 objectId = 12;
+                canStoreInInventory = true;
                 break;
             case "Wheat(Clone)":
                 objectId = 13;
+                canStoreInInventory = true;
                 break;
 
 

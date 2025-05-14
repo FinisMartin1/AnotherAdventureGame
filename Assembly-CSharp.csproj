@@ -76,6 +76,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\OpenMeterialMenu.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\BuildSelectMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\Object Scripts\Properties.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\SetBuildObjectSelector.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\AttackSpace.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DisableSelector.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\SelectMenuControl.cs" />
     <Compile Include="Assets\Scripts\Object Scripts\Bottle.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />

@@ -25,6 +25,7 @@ public class SelectObject : MonoBehaviour
 
     public List<GameObject> selectedObjects = new List<GameObject>();
     public GameObject selectedPlayer = null;
+    public GameObject selectMenuObject = null;
     public enum Selectors
     {
         noSelector,
@@ -140,6 +141,7 @@ public class SelectObject : MonoBehaviour
 
             SetSelector();
             CheckUISelection();
+            selectMenuObject = null;
 
         }
         if (selectedObjects.Count == 1 && selectedObjects[0].name == "Player")
@@ -152,6 +154,10 @@ public class SelectObject : MonoBehaviour
         {
             this.selectedPlayer = null;
             this.CharacterPortrait.SetActive(false);
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            selectMenuObject = Utils.GetGameObjectAtMousePossition();
         }
     }
 
